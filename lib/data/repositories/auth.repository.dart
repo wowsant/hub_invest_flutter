@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:hub_invest_flutter/core/network/api.client.dart';
 import 'package:hub_invest_flutter/data/models/login.response.dart';
+import 'package:hub_invest_flutter/data/models/signup.request.dart';
+import 'package:hub_invest_flutter/data/models/signup.response.dart';
 import 'package:hub_invest_flutter/data/models/user.response.dart';
 
 class AuthRepository {
@@ -17,9 +19,9 @@ class AuthRepository {
       final response = await apiClient.dio.post(
         "/auth/criar",
         data: {
-          "nome": nome,
+          "name": nome,
           "email": email,
-          "senha": senha,
+          "password": senha,
         },
       );
 
@@ -38,7 +40,7 @@ class AuthRepository {
         "/auth",
         data: {
           "email": email,
-          "senha": senha,
+          "password": senha,
         },
       );
 
@@ -46,5 +48,10 @@ class AuthRepository {
     } on DioException catch (e) {
       throw Exception(e.response?.data ?? "Erro ao realizar login");
     }
+  }
+
+  Future<SignupResponse> signup(SignupRequest request) async {
+    final response = await apiClient.dio.post("/auth/criar", data: request.toJson());
+    return SignupResponse.fromJson(response.data);
   }
 }

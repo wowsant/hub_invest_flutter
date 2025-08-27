@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hub_invest_flutter/signup/signup.binding.dart';
+import 'package:hub_invest_flutter/signup/signup.view.dart';
 import 'login/login.binding.dart';
 import 'login/login.view.dart';
 
@@ -64,6 +66,11 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: '/home',
           page: () => const _HomeView(),
+        ),
+        GetPage(
+          name: '/signup',
+          page: () => const SignupView(),
+          binding: SignupBinding(),
         ),
       ],
     );
