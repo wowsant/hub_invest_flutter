@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_strategy/url_strategy.dart'; // Dependência url_strategy 0.3.0
 import 'package:hub_invest_flutter/signup/signup.binding.dart';
 import 'package:hub_invest_flutter/signup/signup.view.dart';
-import 'package:url_strategy/url_strategy.dart';
 import 'login/login.binding.dart';
 import 'login/login.view.dart';
 
 void main() {
+  // Remove o # da URL no Flutter Web
   setPathUrlStrategy();
   runApp(const MyApp());
 }
