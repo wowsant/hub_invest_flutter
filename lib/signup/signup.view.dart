@@ -20,7 +20,7 @@ class SignupView extends GetView<SignupController> {
           padding: const EdgeInsets.all(24.0),
           child: Column(
             children: [
-              const FlutterLogo(size: 80),
+              Image.asset('assets/images/logo.png', height: 100),
               const SizedBox(height: 16),
               Text("Criar conta", style: Theme.of(context).textTheme.headlineSmall),
               const SizedBox(height: 8),
