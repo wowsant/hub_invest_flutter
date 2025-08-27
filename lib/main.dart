@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hub_invest_flutter/signup/signup.binding.dart';
 import 'package:hub_invest_flutter/signup/signup.view.dart';
+import 'package:url_strategy/url_strategy.dart';
 import 'login/login.binding.dart';
 import 'login/login.view.dart';
 
 void main() {
+  setPathUrlStrategy();
   runApp(const MyApp());
 }
 
@@ -14,7 +16,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const primaryDark = Color(0xFF0B0B1A); // tom escuro do botão "Entrar"
+    const primaryDark = Color(0xFF0B0B1A);
     final inputBorder = OutlineInputBorder(
       borderRadius: BorderRadius.circular(12),
       borderSide: BorderSide.none,
@@ -22,7 +24,7 @@ class MyApp extends StatelessWidget {
 
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Login',
+      title: 'HubInvest',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: primaryDark, primary: primaryDark),
         scaffoldBackgroundColor: Colors.white,
@@ -64,20 +66,20 @@ class MyApp extends StatelessWidget {
           binding: LoginBinding(),
         ),
         GetPage(
-          name: '/home',
-          page: () => const _HomeView(),
-        ),
-        GetPage(
           name: '/signup',
           page: () => const SignupView(),
           binding: SignupBinding(),
+        ),
+        GetPage(
+          name: '/home',
+          page: () => const _HomeView(),
         ),
       ],
     );
   }
 }
 
-// placeholder de home
+// Placeholder de Home
 class _HomeView extends StatelessWidget {
   const _HomeView();
 
