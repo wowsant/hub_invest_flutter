@@ -41,7 +41,7 @@ class MainScaffold extends StatelessWidget {
             final items = menu.items;
             return ListView.separated(
               padding: const EdgeInsets.all(8),
-              separatorBuilder: (_, __) => const Divider(height: 1),
+              separatorBuilder: (_, _) => const Divider(height: 1),
               itemCount: items.length,
               itemBuilder: (_, i) {
                 final it = items[i];
