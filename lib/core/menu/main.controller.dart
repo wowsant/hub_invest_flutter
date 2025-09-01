@@ -1,8 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../data/models/menu.item.model.dart';
 import '../../data/repositories/menu.repository.dart';
-import '../routes/app_routes.dart';
 
 class MainController extends GetxController {
   final MenuRepository repo;

@@ -22,11 +22,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const primaryDark = Color(0xFF0B0B1A);
-    final inputBorder = OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12),
-      borderSide: BorderSide.none,
-    );
 
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,

@@ -36,13 +36,13 @@ class AuthRepository {
   Future<SignupResponse> signup(SignupRequest request) async {
     try {
       final response = await apiClient.dio.post(
-        "/auth/signup", // ajuste para o endpoint correto da sua API
+        "/auth/criar", // ajuste para o endpoint correto da sua API
         data: {
-          "nome": request.nome,
+          "name": request.nome,
           "email": request.email,
-          "senha": request.senha,
-          "pais": request.pais,
-          "telefone": request.telefone,
+          "password": request.senha,
+          "country": request.pais,
+          "phone": request.telefone,
         },
       );
 

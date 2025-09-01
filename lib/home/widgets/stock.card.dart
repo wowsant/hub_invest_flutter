@@ -8,7 +8,7 @@ class StockCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isUp = item.percentageVariation >= 0;
-    final changeText = (isUp ? '+' : '') + item.percentageVariation.toStringAsFixed(2) + '%';
+    final changeText = '${isUp ? '+' : ''}${item.percentageVariation.toStringAsFixed(2)}%';
 
     return Container(
       decoration: BoxDecoration(
