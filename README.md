@@ -18,3 +18,17 @@ samples, guidance on mobile development, and a full API reference.
 
 flutter run | Select-String -NotMatch "EGL_emulation"
 
+
+
+/*
+4) Como replicar o padrão para outras telas
+
+Crie o módulo (pasta) feature/feature.binding.dart, feature.controller.dart, feature.view.dart.
+
+Na rota da tela interna, faça page: () => MainScaffold(body: FeatureView()).
+
+Para telas sem AppBar (ex.: login/cadastro), registre a rota normalmente sem MainScaffold.
+
+Se precisar de menu dinâmico diferente, ajuste MenuRepository (ele pode bater na sua API para retornar itens conforme o usuário/feature).
+
+*/

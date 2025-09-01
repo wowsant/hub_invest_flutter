@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hub_invest_flutter/core/layout/main_scaffold.dart';
+import 'package:hub_invest_flutter/core/menu/main.controller.dart';
+import 'package:hub_invest_flutter/core/routes/app_routes.dart';
+import 'package:hub_invest_flutter/home/home.binding.dart';
+import 'package:hub_invest_flutter/home/home.view.dart';
 import 'package:url_strategy/url_strategy.dart'; // Dependência url_strategy 0.3.0
 import 'package:hub_invest_flutter/signup/signup.binding.dart';
 import 'package:hub_invest_flutter/signup/signup.view.dart';
@@ -26,6 +31,36 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'HubInvest',
+      initialBinding: MainBinding(),
+      initialRoute: Routes.login,
+
+
+      getPages: [
+
+        GetPage(
+          name: '/login',
+          page: () => const LoginView(),
+          binding: LoginBinding(),
+        ),
+        GetPage(
+          name: '/signup',
+          page: () => const SignupView(),
+          binding: SignupBinding(),
+        ),
+        GetPage(
+          name: Routes.home,
+          binding: HomeBinding(),
+          page: () => const MainScaffold(body: HomeView()),
+        ),
+
+      ],
+
+
+
+
+
+
+/*
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: primaryDark, primary: primaryDark),
         scaffoldBackgroundColor: Colors.white,
@@ -73,21 +108,12 @@ class MyApp extends StatelessWidget {
         ),
         GetPage(
           name: '/home',
-          page: () => const _HomeView(),
+          page: () => const HomeView(),
+          binding: HomeBinding(),
         ),
       ],
-    );
-  }
-}
 
-// Placeholder de Home
-class _HomeView extends StatelessWidget {
-  const _HomeView();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: Text('Home')),
+      */
     );
   }
 }

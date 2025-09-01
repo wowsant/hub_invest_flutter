@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:hub_invest_flutter/core/network/api.client.dart';
 import '../data/models/signup.request.dart';
 import '../data/repositories/auth.repository.dart';
+import 'package:hub_invest_flutter/core/storage/secure.storage.dart';
 
 class SignupController extends GetxController {
   final nameController = TextEditingController();
@@ -12,6 +13,15 @@ class SignupController extends GetxController {
   final phoneController = TextEditingController();
 
   final isLoading = false.obs;
+
+  // Inicialize o AuthRepository com o ApiClient e SecureStorage
+  late final AuthRepository authRepository;
+
+  @override
+  void onInit() {
+    super.onInit();
+    authRepository = AuthRepository(ApiClient(SecureStorage()));
+  }
 
   Future<void> signup() async {
     try {
@@ -25,8 +35,8 @@ class SignupController extends GetxController {
         telefone: phoneController.text,
       );
 
-      final response = await AuthRepository(ApiClient()).signup(request);
-      
+      final response = await authRepository.signup(request);
+
       Get.snackbar("Sucesso", "Conta criada com sucesso: ${response.usuarioId}");
       Get.offAllNamed("/home");
     } catch (e) {

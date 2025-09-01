@@ -28,7 +28,7 @@ class LoginController extends GetxController {
   }
 
   String? validatePassword(String? value) {
-    if (value == null || value.length < 6) {
+    if (value == null || value.length < 3) {
       return 'Senha muito curta';
     }
     return null;

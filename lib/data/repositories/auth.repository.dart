@@ -10,6 +10,7 @@ class AuthRepository {
 
   AuthRepository(this.apiClient);
 
+  // Método antigo de registro (pode manter ou remover se preferir)
   Future<UserResponse> register({
     required String nome,
     required String email,
@@ -31,27 +32,47 @@ class AuthRepository {
     }
   }
 
+  // Novo método signup usado pelo SignupController
+  Future<SignupResponse> signup(SignupRequest request) async {
+    try {
+      final response = await apiClient.dio.post(
+        "/auth/signup", // ajuste para o endpoint correto da sua API
+        data: {
+          "nome": request.nome,
+          "email": request.email,
+          "senha": request.senha,
+          "pais": request.pais,
+          "telefone": request.telefone,
+        },
+      );
+
+      return SignupResponse.fromJson(response.data);
+    } on DioException catch (e) {
+      throw Exception(e.response?.data ?? "Erro ao criar conta");
+    }
+  }
+
   Future<LoginResponse> login({
     required String email,
     required String senha,
   }) async {
     try {
       final response = await apiClient.dio.post(
-        "/auth",
+        "/auth/login",
         data: {
           "email": email,
           "password": senha,
         },
       );
 
-      return LoginResponse.fromJson(response.data);
+      final loginResponse = LoginResponse.fromJson(response.data);
+
+      // salva o token para ser usado depois no ApiClient
+      await apiClient.secureStorage.saveToken(loginResponse.token);
+
+      return loginResponse;
     } on DioException catch (e) {
       throw Exception(e.response?.data ?? "Erro ao realizar login");
     }
-  }
-
-  Future<SignupResponse> signup(SignupRequest request) async {
-    final response = await apiClient.dio.post("/auth/criar", data: request.toJson());
-    return SignupResponse.fromJson(response.data);
   }
 }

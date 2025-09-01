@@ -7,9 +7,19 @@ import 'package:hub_invest_flutter/login/login.controller.dart';
 class LoginBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => ApiClient());
-    Get.lazyPut(() => AuthRepository(Get.find<ApiClient>()));
+    // Primeiro o SecureStorage
     Get.lazyPut(() => SecureStorage());
-    Get.lazyPut(() => LoginController(Get.find<AuthRepository>(), Get.find<SecureStorage>()));
+
+    // Depois o ApiClient, injetando o SecureStorage
+    Get.lazyPut(() => ApiClient(Get.find<SecureStorage>()));
+
+    // AuthRepository depende do ApiClient
+    Get.lazyPut(() => AuthRepository(Get.find<ApiClient>()));
+
+    // Controller depende do AuthRepository + SecureStorage
+    Get.lazyPut(() => LoginController(
+          Get.find<AuthRepository>(),
+          Get.find<SecureStorage>(),
+        ));
   }
 }
